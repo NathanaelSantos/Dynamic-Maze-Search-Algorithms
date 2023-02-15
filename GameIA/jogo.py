@@ -10,20 +10,26 @@ altura_tela = 600
 # Crie a tela
 tela = pygame.display.set_mode((largura_tela, altura_tela))
 
-# Carregue a imagem de fundo
-fundo_img = pygame.image.load(r'C:\Users\Nathan\Documents\GameIA\bg.png')
+# Crie um objeto para controlar a taxa de atualização da tela
+clock = pygame.time.Clock()
 
-# Defina a posição da imagem de fundo
-fundo_pos = (0, 0)
+# Defina as cores a serem utilizadas
+cor_fundo = (255, 255, 255)
+cor_parede = (0, 0, 0)
+cor_jogador = (255, 0, 0)
 
 # Defina a posição inicial do jogador
 jogador_pos = [largura_tela/2, altura_tela/2]
 
 # Defina a velocidade do jogador
-velocidade_jogador = 5
+velocidade_jogador = 20
+
+# Crie uma lista vazia para armazenar as paredes do labirinto
+paredes = []
 
 # Defina o loop principal do jogo
 terminou = False
+desenhando_parede = False  # Flag que indica se o usuário está desenhando uma parede
 while not terminou:
     # Verifique os eventos do Pygame
     for event in pygame.event.get():
@@ -43,29 +49,37 @@ while not terminou:
             # Move o jogador para baixo
             elif event.key == pygame.K_DOWN:
                 jogador_pos[1] += velocidade_jogador
+            # Inicia o desenho de uma parede
+            elif event.key == pygame.K_d:
+                desenhando_parede = True
+            # Finaliza o desenho de uma parede
+            elif event.key == pygame.K_f:
+                desenhando_parede = False
+        # Verifique se o botão do mouse foi pressionado
+        elif event.type == pygame.MOUSEBUTTONDOWN and desenhando_parede:
+            # Adiciona uma nova parede na lista de paredes
+            posicao_mouse = pygame.mouse.get_pos()
+            paredes.append(pygame.Rect(posicao_mouse[0], posicao_mouse[1], 30, 30))
 
-    # Desenhe a imagem de fundo na tela
-    tela.blit(fundo_img, fundo_pos)
+    # Preenche o fundo da tela com a cor de fundo
+    tela.fill(cor_fundo)
 
-    # Desenhe o jogador na tela
-    jogador_cor = (255, 0, 0)
-    width_jogador = 9
-    height_jogador = 9
+    # Desenha as paredes na tela
+    for parede in paredes:
+        pygame.draw.rect(tela, cor_parede, parede)
+
+    # Desenha o jogador na tela
+    width_jogador = 30
+    height_jogador = 30
     jogador_rect = pygame.Rect(jogador_pos[0], jogador_pos[1], width_jogador, height_jogador)
-    pygame.draw.rect(tela, jogador_cor, jogador_rect)
+    pygame.draw.rect(tela, cor_jogador, jogador_rect)
 
-    # Verifique se o jogador chegou ao limite da tela
-    if jogador_pos[0] < 0:
-        jogador_pos[0] = 0
-    elif jogador_pos[0] > largura_tela - jogador_rect.width:
-        jogador_pos[0] = largura_tela - jogador_rect.width
-    if jogador_pos[1] < 0:
-        jogador_pos[1] = 0
-    elif jogador_pos[1] > altura_tela - jogador_rect.height:
-        jogador_pos[1] = altura_tela - jogador_rect.height
-
-    # Atualize a tela do jogo
+    # Atualiza a tela
     pygame.display.update()
 
-# Encerre o Pygame
+    # Defina a taxa de quadros por segundo
+    clock.tick(60)
+
+    # Encerre o Pygame
 pygame.quit()
+
