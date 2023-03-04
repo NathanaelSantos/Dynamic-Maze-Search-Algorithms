@@ -1,4 +1,5 @@
 import pygame
+import csv
 
 pygame.init()
 
@@ -20,13 +21,14 @@ keys = pygame.key.get_pressed()
 
 # Define a matriz que representa o labirinto
 maze = [[(i, j, 0) for j in range(16)] for i in range(12)]
+#print(maze[0])
 
 # Cria uma lista de cores para cada célula do labirinto
 cell_colors = [[white for j in range(16)] for i in range(12)]
 
 # definindo a posição inicial do quadrado
 x = 0
-y = 0
+y = 50
 
 speed = 50
 
@@ -41,6 +43,22 @@ def draw_cell(row, col):
     else:
         cell_surf.fill(white)
     screen.blit(cell_surf, (col * cell_size, row * cell_size))
+
+def verify_state(maze):
+    states = []
+    #print(initial_pos)
+    for i in range(len(maze)):
+        for j in range(len(maze[0])):
+            if (maze[i][j][2] == 0):
+                states.append(maze[i][j])
+    print(states)
+    return states
+
+def export_csv(stateList):
+    with open("states.csv", "w") as f:
+        file = csv.writer(f)
+        file.writerow(["x", "y", "painted"])
+        file.writerows(stateList)
 
 # loop principal do jogo
 running = True
@@ -68,6 +86,11 @@ while running:
                                 cell_colors[i][j] = blue
                             else:
                                 cell_colors[i][j] = white
+            #Ativar função de exportar estados ao pressionar espaço
+            elif event.key == pygame.K_SPACE:
+                state_list = verify_state(maze)
+                export_csv(state_list)
+
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and paint_mode: # detecta o clique do mouse no modo de pintura
             # Obtém a posição do mouse na tela
             mouse_pos = pygame.mouse.get_pos()
