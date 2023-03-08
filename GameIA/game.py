@@ -48,47 +48,55 @@ def draw_cell(row, col):
 
 def verify_state(maze):
     states = []
-    # print(initial_pos)
     for i in range(len(maze)):
         for j in range(len(maze[0])):
             if (maze[i][j][2] == 0):
-                states.append(maze[i][j])
-    print(states)
+                aux = list(maze[i][j])
+                aux.pop(2)
+                states.append(tuple(aux))
+    print("State List: ", states)
     return states
 
 def verify_edges(stateList):
-    vertexIni = []
-    vertexFin = []
+    edge_list = []
     for i in stateList:
         current_pos = (i[0], i[1])
         for i in range(4):
-            new_current_pos = verify_movement(stateList, current_pos, i)
-        aux.append((i[0], i[1]))
-    print(aux)
+            new_current_pos = verify_adj_vertex(current_pos, i)
+            if new_current_pos in stateList:
+                edge_list.append([current_pos, new_current_pos, 1])
+    print("Edge List: ", edge_list)
+    return edge_list
 
-def verify_movement(stateList, current_pos, movement):
-    if movement == 0: #cima
-        current_pos[0] -= 1
-        if current_pos in stateList:
-            return current_pos
-    elif movement == 1: #baixo
-        current_pos[0] += 1
-        if current_pos in stateList:
-            return current_pos
-    elif movement == 2: #esquerda
-        current_pos[1] -= 1
-        if current_pos in stateList:
-            return current_pos
-    elif movement == 3: #direita
-        current_pos[1] += 1
-        if current_pos in stateList:
-            return current_pos
+def verify_adj_vertex(current_pos, direction):
+    if direction == 0 and current_pos[0] != 0: #cima
+        aux = list(current_pos)
+        aux[0] -= 1
+        return tuple(aux)
+    elif direction == 1 and current_pos != 5: #baixo
+        aux = list(current_pos)
+        aux[0] += 1
+        return tuple(aux)
+    elif direction == 2 and current_pos[1] != 0: #esquerda
+        aux = list(current_pos)
+        aux[1] -= 1
+        return tuple(aux)
+    elif direction == 3 and current_pos[1] != 5: #direita
+        aux = list(current_pos)
+        aux[1] += 1
+        return tuple(aux)
 
 def export_csv_vertex(stateList):
-    with open("states.csv", "w") as f:
+    with open("vertex.csv", "w") as f:
         file = csv.writer(f)
         file.writerow(["x", "y", "painted"])
         file.writerows(stateList)
+
+def export_csv_edges(edgeList):
+    with open("edges.csv", "w") as f:
+        file = csv.writer(f)
+        file.writerow(["From", "To", "Value"])
+        file.writerows(edgeList)
 
 
 # loop principal do jogo
@@ -120,8 +128,10 @@ while running:
             # Ativar função de exportar estados ao pressionar espaço
             elif event.key == pygame.K_SPACE:
                 state_list = verify_state(maze)
+                edge_list = verify_edges(state_list)
                 export_csv_vertex(state_list)
-                verify_edges(state_list)
+                export_csv_edges(edge_list)
+
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and paint_mode:  # detecta o clique do mouse no modo de pintura
             # Obtém a posição do mouse na tela
