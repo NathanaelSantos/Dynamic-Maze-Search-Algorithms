@@ -7,9 +7,11 @@ pygame.init()
 screen_width = 800
 screen_height = 600
 
+
 # criando a tela
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Labirinto")
+
 
 # definindo as cores
 white = (255, 255, 255)
@@ -17,7 +19,12 @@ red = (255, 0, 0)
 black = (0, 0, 0)
 blue = (0, 0, 255)
 
-keys = pygame.key.get_pressed()
+
+# definindo a posição inicial do quadrado
+x = 0
+y = 50
+
+speed = 50
 
 # Define a matriz que representa o labirinto
 maze = [[(i, j, 0) for j in range(16)] for i in range(12)]
@@ -26,15 +33,12 @@ maze = [[(i, j, 0) for j in range(16)] for i in range(12)]
 # Cria uma lista de cores para cada célula do labirinto
 cell_colors = [[white for j in range(16)] for i in range(12)]
 
-# definindo a posição inicial do quadrado
-x = 0
-y = 50
-
-speed = 50
 
 # Define se o modo de pintura está ativo ou não
 paint_mode = True
 
+
+keys = pygame.key.get_pressed()
 
 def draw_cell(row, col):
     cell_size = 50
@@ -48,23 +52,27 @@ def draw_cell(row, col):
 
 def verify_state(maze):
     states = []
+    cont = 0
     for i in range(len(maze)):
         for j in range(len(maze[0])):
             if (maze[i][j][2] == 0):
                 aux = list(maze[i][j])
                 aux.pop(2)
-                states.append(tuple(aux))
+                states.append([cont, tuple(aux)])
+                cont += 1
     print("State List: ", states)
     return states
 
 def verify_edges(stateList):
     edge_list = []
     for i in stateList:
-        current_pos = (i[0], i[1])
-        for i in range(4):
-            new_current_pos = verify_adj_vertex(current_pos, i)
-            if new_current_pos in stateList:
-                edge_list.append([current_pos, new_current_pos, 1])
+        current_id = i[0]
+        current_pos = i[1]
+        for j in range(4):
+            new_current_pos = verify_adj_vertex(current_pos, j)
+            for k in stateList:
+                if new_current_pos == k[1]:
+                    edge_list.append([current_id, k[0], 1])
     print("Edge List: ", edge_list)
     return edge_list
 
@@ -73,7 +81,7 @@ def verify_adj_vertex(current_pos, direction):
         aux = list(current_pos)
         aux[0] -= 1
         return tuple(aux)
-    elif direction == 1 and current_pos != 5: #baixo
+    elif direction == 1 and current_pos[0] != 11: #baixo
         aux = list(current_pos)
         aux[0] += 1
         return tuple(aux)
@@ -81,21 +89,19 @@ def verify_adj_vertex(current_pos, direction):
         aux = list(current_pos)
         aux[1] -= 1
         return tuple(aux)
-    elif direction == 3 and current_pos[1] != 5: #direita
+    elif direction == 3 and current_pos[1] != 15: #direita
         aux = list(current_pos)
         aux[1] += 1
         return tuple(aux)
 
 def export_csv_vertex(stateList):
-    with open("vertex.csv", "w") as f:
-        file = csv.writer(f)
-        file.writerow(["x", "y", "painted"])
+    with open("vertex.csv", "w", newline="", encoding="utf-8") as f:
+        file = csv.writer(f, delimiter=";")
         file.writerows(stateList)
 
 def export_csv_edges(edgeList):
-    with open("edges.csv", "w") as f:
-        file = csv.writer(f)
-        file.writerow(["From", "To", "Value"])
+    with open("edges.csv", "w", newline="", encoding="utf-8") as f:
+        file = csv.writer(f, delimiter=";")
         file.writerows(edgeList)
 
 
@@ -128,8 +134,8 @@ while running:
             # Ativar função de exportar estados ao pressionar espaço
             elif event.key == pygame.K_SPACE:
                 state_list = verify_state(maze)
-                edge_list = verify_edges(state_list)
                 export_csv_vertex(state_list)
+                edge_list = verify_edges(state_list)
                 export_csv_edges(edge_list)
 
 
