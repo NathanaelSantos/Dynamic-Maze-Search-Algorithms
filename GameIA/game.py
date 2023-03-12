@@ -6,6 +6,10 @@ pygame.init()
 screen_width = 800
 screen_height = 600
 
+# cria a tela do menu
+menu_screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Menu")
+
 # criando a tela
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Labirinto")
@@ -15,6 +19,76 @@ white = (255, 255, 255)
 red = (255, 0, 0)
 black = (0, 0, 0)
 blue = (0, 0, 255)
+
+def draw_menu():
+    menu_screen.fill(white)
+
+    # desenha um texto "Jogar"
+    font = pygame.font.Font(None, 25)
+
+
+    # desenha um botão "Busca em Profundidade"
+    pygame.draw.rect(menu_screen, blue, (280, 100, 280, 50))
+
+    # desenha um texto "Busca em Profundidade"
+    text = font.render("Busca em Profundidade", True, white)
+    menu_screen.blit(text, (319, 118))
+
+    # desenha um botão "Busca em Largura"
+    pygame.draw.rect(menu_screen, blue, (280, 200, 280, 50))
+
+    # desenha um texto "Busca em Largura"
+    text = font.render("Busca em Largura", True, white)
+    menu_screen.blit(text, (340, 218))
+
+    # desenha um botão "Busca por Custo Uniforme"
+    pygame.draw.rect(menu_screen, blue, (280, 300, 280, 50))
+
+    # desenha um texto "Busca por Custo Uniforme"
+    text = font.render("Busca por Custo Uniforme", True, white)
+    menu_screen.blit(text, (310, 318))
+
+    # desenha um botão "Sair"
+    pygame.draw.rect(menu_screen, red, (280, 400, 280, 50))
+
+    # desenha um texto "Sair"
+    text = font.render("Sair", True, white)
+    menu_screen.blit(text, (400, 418))
+
+    pygame.display.update()
+
+
+
+# loop principal do menu
+menu_running = True
+while menu_running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = pygame.mouse.get_pos()
+             # Verifica se clicou no botão "Busca em Profundidade"
+            if 280 <= mouse_pos[0] <= 560 and 100 <= mouse_pos[1] <= 150:
+                # Iniciar jogo com busca em profundidade
+                menu_running = False
+
+            # Verifica se clicou no botão "Busca em Largura"
+            elif 280 <= mouse_pos[0] <= 560 and 200 <= mouse_pos[1] <= 250:
+                # Iniciar jogo com busca em largura
+                game_loop("breadth")
+
+            # Verifica se clicou no botão "Busca por Custo Uniforme"
+            elif 280 <= mouse_pos[0] <= 560 and 300 <= mouse_pos[1] <= 350:
+                # Iniciar jogo com busca por custo uniforme
+                game_loop("uniform")
+
+            # Verifica se clicou no botão "Sair"
+            elif 280 <= mouse_pos[0] <= 560 and 400 <= mouse_pos[1] <= 450:
+                pygame.quit()
+                sys.exit()
+                
+    # desenha o menu
+    draw_menu()
 
 keys = pygame.key.get_pressed()
 
