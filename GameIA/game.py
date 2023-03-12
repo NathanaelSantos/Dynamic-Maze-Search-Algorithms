@@ -29,6 +29,8 @@ x = 0
 y = 0
 
 speed = 50
+row_final = 11
+col_final = 15
 
 # Define se o modo de pintura está ativo ou não
 paint_mode = True
@@ -51,6 +53,18 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
+            
+            
+            # verifica se a célula atual está marcada em azul
+            row = y // cell_size
+            col = x // cell_size
+            if maze[row][col][2] == 1:
+                # se estiver marcada em azul, mantém a posição anterior do quadrado vermelho
+                x, y = old_x, old_y
+
+            # salva a posição atual do quadrado vermelho
+            old_x, old_y = x, y
+            
             if event.key == pygame.K_LEFT and x > 0:
                 x -= speed
             elif event.key == pygame.K_RIGHT and x < screen_width - 50:
@@ -82,6 +96,16 @@ while running:
             # Desenha a célula
             draw_cell(row, col)
 
+
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3 and paint_mode: # detecta o clique do mouse no modo de pintura
+            # Obtém a posição do mouse na tela
+            mouse_pos = pygame.mouse.get_pos()
+            # Obtém a posição da casa na matriz
+            row_final = mouse_pos[1] // cell_size
+            col_final = mouse_pos[0] // cell_size
+    
+
+
     # Impede que o quadrado ande na diagonal
     if x < 0:
         x = 0
@@ -106,6 +130,8 @@ while running:
             # Preenche a superfície com a cor azul se a casa estiver marcada
             if maze[i][j][2] == 1:
                 cell_surf.fill(blue)
+            elif maze[i][j] == maze[row_final][col_final]:
+                cell_surf.fill((204,255,51))
             # Preenche a superfície com a cor branca se a casa não estiver marcada
             else:
                 cell_surf.fill(white)
@@ -122,6 +148,6 @@ while running:
     rect = pygame.Rect(x, y, 50, 50)
     pygame.draw.rect(screen, red, rect)
 
+   
     # atualizando a tela
     pygame.display.update()
-
