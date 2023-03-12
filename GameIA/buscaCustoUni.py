@@ -155,7 +155,6 @@ gt.graph_draw(g_bfs,
                output_size=(6000, 6000),            
                output="buscaCustoUniforme.png")
 
-list = list(tuple(bfsv_name))
-string_list = '\n'.join(list) + '\n'
+string_list = '\n'.join(path) + '\n'
 with open('djkistra_path.txt', 'w') as file:
     file.write(string_list)

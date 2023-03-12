@@ -135,7 +135,6 @@ gt.graph_draw(g_bfs, #pos=gt.sfdp_layout(g_bfs),
               output_size=(6000, 6000),
               output="BuscaLargura.png")
 
-list = list(tuple(v_name_bfs))
-string_list = '\n'.join(list) + '\n'
+string_list = '\n'.join(path) + '\n'
 with open('bfs_path.txt', 'w') as file:
     file.write(string_list)

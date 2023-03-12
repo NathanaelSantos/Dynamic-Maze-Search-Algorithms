@@ -134,7 +134,6 @@ gt.graph_draw(g_dfs, #pos=gt.sfdp_layout(g_dfs),
               output_size=(6000, 6000),
               output="BuscaProfundidade.png")  
 
-list = list(tuple(v_name_dfs))
-string_list = '\n'.join(list) + '\n'
+string_list = '\n'.join(path) + '\n'
 with open('dfs_path.txt', 'w') as file:
     file.write(string_list)  
