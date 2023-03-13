@@ -1,5 +1,6 @@
 import pygame
 import csv
+import math
 
 pygame.init()
 
@@ -58,7 +59,9 @@ def verify_state(maze):
             if (maze[i][j][2] == 0):
                 aux = list(maze[i][j])
                 aux.pop(2)
-                states.append([cont, tuple(aux)])
+                distance = vertex_distance(tuple(aux), final_pos=(11, 15))
+                rounded_distance = round(distance, 2)
+                states.append([cont, tuple(aux), rounded_distance])
                 cont += 1
     print("State List: ", states)
     return states
@@ -68,6 +71,8 @@ def verify_edges(stateList):
     for i in stateList:
         current_id = i[0]
         current_pos = i[1]
+        #distance = vertex_distance(current_pos, final_pos=(11, 15))
+        #rounded_distance = round(distance, 2)
         for j in range(4):
             new_current_pos = verify_adj_vertex(current_pos, j)
             for k in stateList:
@@ -93,6 +98,10 @@ def verify_adj_vertex(current_pos, direction):
         aux = list(current_pos)
         aux[1] += 1
         return tuple(aux)
+    
+def vertex_distance(current_pos, final_pos):
+    distance = math.sqrt((final_pos[0] - current_pos[0])**2 + (final_pos[1] - current_pos[1])**2)
+    return distance
 
 def export_csv_vertex(stateList):
     with open("vertex.csv", "w", newline="", encoding="utf-8") as f:
@@ -103,6 +112,18 @@ def export_csv_edges(edgeList):
     with open("edges.csv", "w", newline="", encoding="utf-8") as f:
         file = csv.writer(f, delimiter=";")
         file.writerows(edgeList)
+
+def read_file_path(arquivo):
+    tuplas = []
+    linhas = arquivo.readlines()
+    for linha in linhas:
+        campos = linha.strip().replace("(", "").replace(")", "").replace(" ","").split(',')
+        tuplas.append((int(campos[0]),int(campos[1])))
+    return tuplas
+# Como chamar a função
+#file = open("bfs_path.txt", "r")
+#path = read_file_path(file)
+#print(path)
 
 
 # loop principal do jogo
