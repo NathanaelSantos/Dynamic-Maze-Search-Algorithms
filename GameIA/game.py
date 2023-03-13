@@ -39,7 +39,6 @@ cell_colors = [[white for j in range(16)] for i in range(12)]
 paint_mode = True
 
 
-keys = pygame.key.get_pressed()
 
 def draw_cell(row, col):
     cell_size = 50
@@ -120,8 +119,8 @@ def read_file_path(arquivo):
         campos = linha.strip().replace("(", "").replace(")", "").replace(" ","").split(',')
         tuplas.append((int(campos[0]),int(campos[1])))
     return tuplas
-# Como chamar a função
-#file = open("bfs_path.txt", "r")
+# Como chamar a função - Nathan
+#file = open("Outputs/bfs_path.txt", "r")
 #path = read_file_path(file)
 #print(path)
 

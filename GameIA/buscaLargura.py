@@ -73,7 +73,7 @@ gt.graph_draw(g, #pos=gt.arf_layout(visual_G),
                vertex_shape="circle",
                vertex_fill_color="#729fcf",
                output_size=(6000, 6000),
-               output="Grafo.png")
+               output="Outputs/Grafo.png")
 
 #Busca em Largura (bfs) e geração das arestas
 g_bfs = gt.Graph()                                      # criação do objeto para busca em Largura
@@ -133,8 +133,8 @@ gt.graph_draw(g_bfs, #pos=gt.sfdp_layout(g_bfs),
               vertex_shape="circle",
               #vertex_fill_color="#729fcf",
               output_size=(6000, 6000),
-              output="BuscaLargura.png")
+              output="Outputs/BuscaLargura.png")
 
 string_list = '\n'.join(path) + '\n'
-with open('bfs_path.txt', 'w') as file:
+with open('Outputs/bfs_path.txt', 'w') as file:
     file.write(string_list)
