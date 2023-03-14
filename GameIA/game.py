@@ -44,6 +44,8 @@ row_final = 11
 col_final = 15
 cell_size = 50
 
+# Defina a lista de coordenadas para o quadrado seguir
+coord_list = []
 
 def play_music():
     pygame.mixer.music.load("/home/nathan/Downloads/AI-Maze-Game/GameIA/music.mp3")
@@ -182,13 +184,13 @@ def export_csv_edges(edgeList):
         file = csv.writer(f, delimiter=";")
         file.writerows(edgeList)
 
+#Cria a lista de tuplas do caminho a ser seguido até o estado final
 def read_file_path(arquivo):
-    tuplas = []
     linhas = arquivo.readlines()
     for linha in linhas:
         campos = linha.strip().replace("(", "").replace(")", "").replace(" ","").split(',')
-        tuplas.append((int(campos[0]),int(campos[1])))
-    return tuplas
+        coord_list.append((int(campos[0]),int(campos[1])))
+    return coord_list
 
 
 def menu():
@@ -240,17 +242,6 @@ def menu():
         # desenha o menu
         draw_menu()
 
-# Defina a lista de coordenadas
-coord_list = []
-
-if os.path.isfile("Outputs/bfs_path.txt") and os.path.getsize("Outputs/bfs_path.txt") > 0:
-    with open("Outputs/bfs_path.txt", "r") as file:
-        for line in file:
-            line = line.strip()  # remove espaços em branco do início e do fim da linha
-            if line:
-                l, c = line.strip("()").split(",")  # extrai os números da tupla como strings
-                coord_list.append((int(l), int(c)))  # adiciona uma tupla com números inteiros à lista
-
 
 # Defina a velocidade de movimentação e o índice atual da lista de coordenadas
 speed = 10
@@ -281,7 +272,6 @@ while running:
                 export_csv_vertex(state_list)
                 edge_list = verify_edges(state_list)
                 export_csv_edges(edge_list)
-            elif event.key == pygame.K_m:
                 menu()
 
 
