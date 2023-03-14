@@ -126,7 +126,7 @@ bfse_weight_bfs = g_bfs.new_edge_property("int")       # referenciação da list
 print("------------------------------------------------")
 print("> Busca A Estrela - Caminhamento pelos Estados")
 print("------------------------------------------------\n")
-raiz = '(1, 0)'
+raiz = '(0, 0)'
 alvo = '(11, 15)'
 index_raiz = list(v_name).index(raiz)
 index_alvo = list(v_name).index(alvo)

@@ -89,7 +89,7 @@ e_action_bfs = g_bfs.new_edge_property("string")
 print("---------------------------------------------")
 print("> Busca em Largura - Caminhamento pelos Estados")
 print("---------------------------------------------\n")
-raiz = '(1, 1)'
+raiz = '(0, 0)'
 alvo = '(11, 15)'
 index_raiz = list(v_name).index(raiz)
 

@@ -88,7 +88,7 @@ e_action_dfs = g_dfs.new_edge_property("string")
 print("------------------------------------------------------")
 print("> Busca em Profundidade - Caminhamento pelos Estados")
 print("------------------------------------------------------\n")
-raiz = '(1, 0)'
+raiz = '(0, 0)'
 alvo = '(11, 15)'
 index_raiz = list(v_name).index(raiz)
 

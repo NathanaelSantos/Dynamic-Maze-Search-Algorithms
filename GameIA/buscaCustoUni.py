@@ -104,7 +104,7 @@ bfse_weight_bfs = g_bfs.new_edge_property("float")       # referenciação da li
 print("------------------------------------------------")
 print("> Busca de Custo Uniforme - Caminhamento pelos Estados")
 print("------------------------------------------------\n")
-raiz = '(1, 0)'
+raiz = '(0, 0)'
 alvo = '(11, 15)'
 index_raiz = list(v_name).index(raiz)
 

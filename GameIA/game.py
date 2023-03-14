@@ -188,12 +188,17 @@ while menu_running:
             # Verifica se clicou no botão "Busca em Largura"
             elif 280 <= mouse_pos[0] <= 560 and 200 <= mouse_pos[1] <= 250:
                 # Iniciar jogo com busca em largura
-                game_loop("breadth")
+                menu_running = False
+                from buscaLargura import *
+                file = open("Outputs/bfs_path.txt", "r")
+                path = read_file_path(file)
+                print(path)
+                #FUNÇÂO PARA PRINTAR
 
             # Verifica se clicou no botão "Busca por Custo Uniforme"
             elif 280 <= mouse_pos[0] <= 560 and 300 <= mouse_pos[1] <= 350:
                 # Iniciar jogo com busca por custo uniforme
-                game_loop("uniform")
+                pass
 
             # Verifica se clicou no botão "Sair"
             elif 280 <= mouse_pos[0] <= 560 and 400 <= mouse_pos[1] <= 450:
