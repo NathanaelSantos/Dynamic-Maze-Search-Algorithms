@@ -1,6 +1,10 @@
 import pygame
 import csv
 import math
+import importlib
+import threading
+import os
+
 
 pygame.init()
 
@@ -16,7 +20,6 @@ pygame.display.set_caption("Menu")
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Labirinto")
 
-
 # definindo as cores
 white = (255, 255, 255)
 red = (255, 0, 0)
@@ -26,7 +29,7 @@ blue = (0, 0, 255)
 
 # definindo a posição inicial do quadrado
 x = 0
-y = 50
+y = 0
 
 speed = 50
 
@@ -37,13 +40,19 @@ maze = [[(i, j, 0) for j in range(16)] for i in range(12)]
 # Cria uma lista de cores para cada célula do labirinto
 cell_colors = [[white for j in range(16)] for i in range(12)]
 
-# definindo a posição inicial do quadrado
-x = 0
-y = 50
-
-speed = 50
 row_final = 11
 col_final = 15
+cell_size = 50
+
+
+def play_music():
+    pygame.mixer.music.load("/home/nathan/Downloads/AI-Maze-Game/GameIA/music.mp3")
+    pygame.mixer.music.play(-1)
+
+# cria a thread para tocar a música
+music_thread = threading.Thread(target=play_music)
+music_thread.start()
+
 
 # Define se o modo de pintura está ativo ou não
 paint_mode = True
@@ -56,39 +65,53 @@ def draw_menu():
 
 
     # desenha um botão "Busca em Profundidade"
-    pygame.draw.rect(menu_screen, blue, (280, 100, 280, 50))
+    pygame.draw.rect(menu_screen, blue, (280, 55, 280, 45))
 
     # desenha um texto "Busca em Profundidade"
     text = font.render("Busca em Profundidade", True, white)
-    menu_screen.blit(text, (319, 118))
+    menu_screen.blit(text, (322, 70))
 
     # desenha um botão "Busca em Largura"
-    pygame.draw.rect(menu_screen, blue, (280, 200, 280, 50))
+    pygame.draw.rect(menu_screen, blue, (280, 105, 280, 45))
 
     # desenha um texto "Busca em Largura"
     text = font.render("Busca em Largura", True, white)
-    menu_screen.blit(text, (340, 218))
+    menu_screen.blit(text, (345, 120))
 
     # desenha um botão "Busca por Custo Uniforme"
-    pygame.draw.rect(menu_screen, blue, (280, 300, 280, 50))
+    pygame.draw.rect(menu_screen, blue, (280, 155, 280, 45))
 
     # desenha um texto "Busca por Custo Uniforme"
     text = font.render("Busca por Custo Uniforme", True, white)
-    menu_screen.blit(text, (310, 318))
+    menu_screen.blit(text, (315, 170))
+
+    # desenha um botão "Busca por Custo Uniforme"
+    pygame.draw.rect(menu_screen, blue, (280, 205, 280, 45))
+
+    # desenha um texto "Busca por Custo Uniforme"
+    text = font.render("Busca Gulosa", True, white)
+    menu_screen.blit(text, (363, 220))
+
+
+    # desenha um botão "Busca por Custo Uniforme"
+    pygame.draw.rect(menu_screen, blue, (280, 255, 280, 45))
+
+    # desenha um texto "Busca por Custo Uniforme"
+    text = font.render("Busca A*", True, white)
+    menu_screen.blit(text, (385, 270))
+
 
     # desenha um botão "Sair"
-    pygame.draw.rect(menu_screen, red, (280, 400, 280, 50))
-
+    pygame.draw.rect(menu_screen, red, (280, 305, 280, 45))
     # desenha um texto "Sair"
     text = font.render("Sair", True, white)
-    menu_screen.blit(text, (400, 418))
+    menu_screen.blit(text, (400, 320))
 
     pygame.display.update()
 
 
 
 def draw_cell(row, col):
-    cell_size = 50
     cell_surf = pygame.Surface((cell_size, cell_size))
     if maze[row][col][2] == 1:
         cell_surf.fill(blue)
@@ -166,66 +189,85 @@ def read_file_path(arquivo):
         campos = linha.strip().replace("(", "").replace(")", "").replace(" ","").split(',')
         tuplas.append((int(campos[0]),int(campos[1])))
     return tuplas
-# Como chamar a função - Nathan
-#file = open("Outputs/bfs_path.txt", "r")
-#path = read_file_path(file)
-#print(path)
 
 
-# loop principal do menu
-menu_running = True
-while menu_running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-             # Verifica se clicou no botão "Busca em Profundidade"
-            if 280 <= mouse_pos[0] <= 560 and 100 <= mouse_pos[1] <= 150:
-                # Iniciar jogo com busca em profundidade
-                menu_running = False
-
-            # Verifica se clicou no botão "Busca em Largura"
-            elif 280 <= mouse_pos[0] <= 560 and 200 <= mouse_pos[1] <= 250:
-                # Iniciar jogo com busca em largura
-                menu_running = False
-                from buscaLargura import *
-                file = open("Outputs/bfs_path.txt", "r")
-                path = read_file_path(file)
-                print(path)
-                #FUNÇÂO PARA PRINTAR
-
-            # Verifica se clicou no botão "Busca por Custo Uniforme"
-            elif 280 <= mouse_pos[0] <= 560 and 300 <= mouse_pos[1] <= 350:
-                # Iniciar jogo com busca por custo uniforme
-                pass
-
-            # Verifica se clicou no botão "Sair"
-            elif 280 <= mouse_pos[0] <= 560 and 400 <= mouse_pos[1] <= 450:
+def menu():
+    # loop principal do menu
+    menu_running = True
+    while menu_running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                # Verifica se clicou no botão "Busca em Profundidade"
+                if 280 <= mouse_pos[0] <= 560 and 55 <= mouse_pos[1] <= 100:
+                    # Iniciar jogo com busca em profundidade
+                    menu_running = False
+                    importlib.import_module('buscaProfundidade')
+                    read_file_path(open("Outputs/dfs_path.txt", "r"))
+
+                # Verifica se clicou no botão "Busca em Largura"
+                elif 280 <= mouse_pos[0] <= 560 and 105 <= mouse_pos[1] <= 150:
+                    menu_running = False
+                    importlib.import_module('buscaLargura')
+                    read_file_path(open("Outputs/bfs_path.txt", "r"))
+
+                # Verifica se clicou no botão "Busca por Custo Uniforme"
+                elif 280 <= mouse_pos[0] <= 560 and 155 <= mouse_pos[1] <= 200:
+                    menu_running = False
+                    importlib.import_module('buscaCustoUni')
+                    read_file_path(open("Outputs/djkistra_path.txt", "r"))
+
+                # Verifica se clicou no botão "Busca Gulosa"
+                elif 280 <= mouse_pos[0] <= 560 and 205 <= mouse_pos[1] <= 250:
+                    menu_running = False
+                    importlib.import_module('buscaGulosa')
+                    read_file_path(open("Outputs/greedy_path.txt", "r"))
+
+                # Verifica se clicou no botão "Busca A*"
+                elif 280 <= mouse_pos[0] <= 560 and 255 <= mouse_pos[1] <= 300:
+                    menu_running = False
+                    importlib.import_module('buscaGulosa')
+                    read_file_path(open("Outputs/greedy_path.txt", "r"))
+
                 
-    # desenha o menu
-    draw_menu()
+
+                # Verifica se clicou no botão "Sair"
+                elif 280 <= mouse_pos[0] <= 560 and 305 <= mouse_pos[1] <= 350:
+                    pygame.quit()
+                    
+        # desenha o menu
+        draw_menu()
+
+# Defina a lista de coordenadas
+coord_list = []
+
+if os.path.isfile("Outputs/bfs_path.txt") and os.path.getsize("Outputs/bfs_path.txt") > 0:
+    with open("Outputs/bfs_path.txt", "r") as file:
+        for line in file:
+            line = line.strip()  # remove espaços em branco do início e do fim da linha
+            if line:
+                l, c = line.strip("()").split(",")  # extrai os números da tupla como strings
+                coord_list.append((int(l), int(c)))  # adiciona uma tupla com números inteiros à lista
+
+
+# Defina a velocidade de movimentação e o índice atual da lista de coordenadas
+speed = 10
+coord_index = 0
 
 
 # loop principal do jogo
 running = True
 while running:
+
     # eventos do teclado
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT and x > 0:
-                x -= speed
-            elif event.key == pygame.K_RIGHT and x < screen_width - 50:
-                x += speed
-            elif event.key == pygame.K_UP and y > 0:
-                y -= speed
-            elif event.key == pygame.K_DOWN and y < screen_height - 50:
-                y += speed
-            elif event.key == pygame.K_b:  # ativa/desativa o modo de pintura ao pressionar a tecla 'b'
+            if event.key == pygame.K_b:  # ativa/desativa o modo de pintura ao pressionar a tecla 'b'
                 paint_mode = not paint_mode
                 # Atualiza a cor de cada célula na lista de cores
                 for i in range(len(maze)):
@@ -234,12 +276,14 @@ while running:
                             cell_colors[i][j] = blue
                         else:
                             cell_colors[i][j] = white
-            # Ativar função de exportar estados ao pressionar espaço
             elif event.key == pygame.K_SPACE:
                 state_list = verify_state(maze)
                 export_csv_vertex(state_list)
                 edge_list = verify_edges(state_list)
                 export_csv_edges(edge_list)
+            elif event.key == pygame.K_m:
+                menu()
+
 
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and paint_mode:  # detecta o clique do mouse no modo de pintura
@@ -263,16 +307,25 @@ while running:
             row_final = mouse_pos[1] // cell_size
             col_final = mouse_pos[0] // cell_size
 
-    # Impede que o quadrado ande na diagonal
-    if x < 0:
-        x = 0
-    elif x > screen_width - 50:
-        x = screen_width - 50
+    # Movimentação automática
+    if coord_index < len(coord_list):
+        # Obtém as coordenadas atuais
+        current_coord = coord_list[coord_index]
 
-    if y < 0:
-        y = 0
-    elif y > screen_height - 50:
-        y = screen_height - 50
+        # Movimenta o jogador em direção às coordenadas atuais
+        if x < current_coord[1] * cell_size:
+            x += speed
+        elif x > current_coord[1] * cell_size:
+            x -= speed
+        elif y < current_coord[0] * cell_size:
+            y += speed
+        elif y > current_coord[0] * cell_size:
+            y -= speed
+        else:
+            # Se o jogador chegou às coordenadas atuais, atualize o índice e insira um delay
+            coord_index += 1
+            pygame.time.delay(500)  # Delay de 500ms (0.5s)
+
 
     # definindo a cor de fundo
     screen.fill(white)
@@ -288,7 +341,7 @@ while running:
             if maze[i][j][2] == 1:
                 cell_surf.fill(blue)
             elif maze[i][j] == maze[row_final][col_final]:
-                cell_surf.fill((204,255,51))
+                cell_surf.fill((80, 200, 120))
             # Preenche a superfície com a cor branca se a casa não estiver marcada
             else:
                 cell_surf.fill(white)
@@ -305,9 +358,9 @@ while running:
     rect = pygame.Rect(x, y, 50, 50)
     pygame.draw.rect(screen, red, rect)
 
+
     # atualizando a tela
     pygame.display.update()
-
 
 
 
