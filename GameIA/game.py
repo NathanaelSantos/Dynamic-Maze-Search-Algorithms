@@ -2,7 +2,6 @@ import pygame
 import csv
 import math
 import importlib
-import threading
 import os
 
 
@@ -46,15 +45,6 @@ cell_size = 50
 
 # Defina a lista de coordenadas para o quadrado seguir
 coord_list = []
-
-def play_music():
-    pygame.mixer.music.load("/home/nathan/Downloads/AI-Maze-Game/GameIA/music.mp3")
-    pygame.mixer.music.play(-1)
-
-# cria a thread para tocar a música
-music_thread = threading.Thread(target=play_music)
-music_thread.start()
-
 
 # Define se o modo de pintura está ativo ou não
 paint_mode = True
