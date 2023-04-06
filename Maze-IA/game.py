@@ -1,15 +1,12 @@
 import pygame
 import csv
 import math
+from constants import *
 import importlib
-import os
 
 
 pygame.init()
 
-# define as dimensões da tela
-screen_width = 800
-screen_height = 600
 
 # cria a tela
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -30,11 +27,6 @@ pygame.display.update()
 pygame.time.delay(2000)
 
 
-
-# definindo as dimensões da tela
-screen_width = 800
-screen_height = 600
-
 # cria a tela do menu
 menu_screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Menu")
@@ -43,18 +35,6 @@ pygame.display.set_caption("Menu")
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Labirinto")
 
-# definindo as cores
-white = (255, 255, 255)
-red = (255, 0, 0)
-black = (0, 0, 0)
-blue = (0, 0, 255)
-
-
-# definindo a posição inicial do quadrado
-x = 0
-y = 0
-
-speed = 50
 
 # Define a matriz que representa o labirinto
 maze = [[(i, j, 0) for j in range(16)] for i in range(12)]
@@ -63,9 +43,6 @@ maze = [[(i, j, 0) for j in range(16)] for i in range(12)]
 # Cria uma lista de cores para cada célula do labirinto
 cell_colors = [[white for j in range(16)] for i in range(12)]
 
-row_final = 11
-col_final = 15
-cell_size = 50
 
 # Defina a lista de coordenadas para o quadrado seguir
 coord_list = []
@@ -268,7 +245,6 @@ def menu():
 
 
 # Defina a velocidade de movimentação e o índice atual da lista de coordenadas
-speed = 10
 coord_index = 0
 
 

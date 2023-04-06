@@ -1,5 +1,6 @@
 import graph_tool.all as gt                       # Biblioteca para GRAFO
 import csv                                        # Biblioteca para Leitura do csv
+from constants import *
 
 class VisitorExample(gt.AStarVisitor):                                            # É um objeto visitante que é chamado nos pontos de evento dentro do algoritmo bfs_search()
     def __init__(self, name, time, name_time, v_color, dist, pred, e_color, e_action, e_ord, target): 
@@ -95,7 +96,7 @@ f_network.close()
 # Lista de Pesos dos vértices criados
 print(" > Lista de pesos h(n): ", list(v_weight))
 
-'''#Desenhando o grafo
+#Desenhando o grafo
 gt.graph_draw(g, #pos=gt.arf_layout(visual_G),
                vertex_text= v_name,
                #edge_text = e_action,
@@ -105,7 +106,7 @@ gt.graph_draw(g, #pos=gt.arf_layout(visual_G),
                vertex_shape="circle",
                vertex_fill_color="#729fcf",
                output_size=(6000, 6000),
-               output="Outputs/Grafo.png")'''
+               output="Outputs/Grafo.png")
 
 def h(v):
     return v_weight[v]
@@ -126,8 +127,11 @@ bfse_weight_bfs = g_bfs.new_edge_property("float")       # referenciação da li
 print("------------------------------------------------")
 print("> Busca A Estrela - Caminhamento pelos Estados")
 print("------------------------------------------------\n")
+
+final_pos = (row_final, col_final)
+
 raiz = '(0, 0)'
-alvo = '(11, 15)'
+alvo = str(final_pos)
 index_raiz = list(v_name).index(raiz)
 index_alvo = list(v_name).index(alvo)
 
@@ -166,21 +170,21 @@ bfsv_color[index_raiz] = "#729fcf"; print("Cores Vértices.........:", list(bfsv
 print("Caminho encontrado.....:",path)                   # mostrando o caminho encontrado da raiz ao alvo
 
 
-'''#Desenhando o grafo
+#Desenhando o grafo
 gt.graph_draw(g_bfs, #pos = v_pos,#pos=gt.arf_layout(g_bfs),
                #bg_color = "white",
                vertex_text= bfsv_name,
                edge_text= bfse_ord, #bfse_action,
                edge_color= bfse_color,
                edge_pen_width = 5,              
-               vertex_fill_color=bfsv_color,              
-               vertex_font_size=15,             # Comentado por erro de RGBA
+               #vertex_fill_color=bfsv_color,              
+               vertex_font_size=15,             
                edge_font_size = 15,
                #vertex_shape="double_circle",
-               #vertex_fill_color="#729fcf",
+               vertex_fill_color="#729fcf",
                vertex_size = 80,
                output_size=(6000, 6000),
-               output="Outputs/Caminho_Busca_Gulosa.png")'''
+               output="Outputs/Caminho_Busca_Gulosa.png")
 
 string_list = '\n'.join(path) + '\n'
 with open('Outputs/greedy_path.txt', 'w') as file:

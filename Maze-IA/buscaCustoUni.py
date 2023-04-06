@@ -1,5 +1,6 @@
 import graph_tool.all as gt                       # Biblioteca para GRAFO
 import csv                                        # Biblioteca para Leitura do csv
+from constants import *
 
 
 class VisitorExample(gt.DijkstraVisitor):                                            # É um objeto visitante que é chamado nos pontos de evento dentro do algoritmo bfs_search()
@@ -75,7 +76,7 @@ print(g.get_edges())
 # Lista de Pesos dos vértices criados
 print(list(e_dist))
 
-'''#Desenhando o grafo
+#Desenhando o grafo
 gt.graph_draw(g, #pos=gt.arf_layout(visual_G),
                vertex_text= v_name,
                #edge_text = e_action,
@@ -85,7 +86,7 @@ gt.graph_draw(g, #pos=gt.arf_layout(visual_G),
                vertex_shape="circle",
                vertex_fill_color="#729fcf",
                output_size=(6000, 6000),
-               output="Outputs/Grafo.png")'''
+               output="Outputs/Grafo.png")
 
 #Busca de Custo Uniforme e geração das arestas
 g_bfs = gt.Graph()                                      # criação do objeto para busca de Custo Uniforme
@@ -104,8 +105,11 @@ bfse_weight_bfs = g_bfs.new_edge_property("float")       # referenciação da li
 print("------------------------------------------------")
 print("> Busca de Custo Uniforme - Caminhamento pelos Estados")
 print("------------------------------------------------\n")
+
+final_pos = (row_final, col_final)
+
 raiz = '(0, 0)'
-alvo = '(11, 15)'
+alvo = str(final_pos)
 index_raiz = list(v_name).index(raiz)
 
 gt.dijkstra_search(g, e_dist, g.vertex(index_raiz), VisitorExample(bfsv_name, bfsv_time, bfsv_name_time, bfsv_color, bfsv_dist, bfsv_pred, bfse_color, bfse_action, bfse_ord))
@@ -141,19 +145,19 @@ bfsv_color[index_raiz] = "#729fcf"; print("Cores Vértices.........:", list(bfsv
 
 print("Caminho encontrado.....:",path)                   # mostrando o caminho encontrado da raiz ao alvo
 
-'''#Desenhando o grafo
+#Desenhando o grafo
 gt.graph_draw(g_bfs, 
                #bg_color = "2",
                vertex_text= bfsv_name,
                edge_text= bfse_action,#bfse_ord, 
                edge_color= bfse_color,
                edge_pen_width = 10,              
-               vertex_fill_color=bfsv_color,    # Comentado por erro de RGBA             
+               vertex_fill_color="#729fcf",                
                vertex_font_size=18,
                edge_font_size = 10,
                vertex_shape="circle",
                output_size=(6000, 6000),            
-               output="Outputs/buscaCustoUniforme.png")'''
+               output="Outputs/buscaCustoUniforme.png")
 
 string_list = '\n'.join(path) + '\n'
 with open('Outputs/djkistra_path.txt', 'w') as file:
