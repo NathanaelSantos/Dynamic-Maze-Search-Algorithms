@@ -4,6 +4,7 @@ import math
 import importlib
 import os
 
+os.environ['SDL_AUDIODRIVER'] = 'dummy'
 
 pygame.init()
 
