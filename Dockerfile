@@ -1,17 +1,13 @@
 # Use uma imagem Ubuntu como base
 FROM ubuntu:latest
 
-# Update the package list and install git
-RUN apt-get update && \
-    apt-get clean && \
-    apt-get install -y git
+RUN apt-get update
+RUN apt-get clean
 
-# Switch to the root user
-USER root
+RUN apt-get install -y git
 
 # Instale as dependências necessárias para instalar o Miniconda
-RUN apt-get update && \
-    apt-get install -y wget bzip2 ca-certificates curl libglib2.0-0 libxext6 libsm6 libxrender1
+RUN apt-get install -y wget bzip2 ca-certificates curl libglib2.0-0 libxext6 libsm6 libxrender1
 
 # Baixe o arquivo .sh do Miniconda
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -21,15 +17,15 @@ RUN /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \
     rm Miniconda3-latest-Linux-x86_64.sh
 
 # Adicione o diretório bin do Miniconda ao PATH
-ENV PATH=/miniconda/bin/conda:$PATH
+SHELL ["/bin/bash", "-c"]
+ENV PATH="/opt/conda/bin:$PATH"
 
 # Instale as dependências do Graph Tool e Pygame
-RUN apt-get update && \
-    apt-get install -y libcairo2-dev libgraphicsmagick++-dev libboost-all-dev libxml2-dev libcairomm-1.0-dev && \
-    conda install -y -c conda-forge graph-tool && \
-    conda install -y -c conda-forge pygame && \
-    conda install -y numpy
+RUN apt-get install -y libcairo2-dev libgraphicsmagick++-dev libboost-all-dev libxml2-dev libcairomm-1.0-dev 
+RUN conda install -y -c conda-forge graph-tool 
+RUN conda install -y -c conda-forge pygame
+RUN conda install -y numpy
 
+ENV DISPLAY=host.docker.internal:0.0
 
-
-
+RUN git clone https://github.com/NathanaelSantos/AI-Maze-Game.git
