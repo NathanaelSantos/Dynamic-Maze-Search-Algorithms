@@ -31,8 +31,13 @@ Before you begin, make sure you have the following installed:
 
 ## Creators
 #### GUILHERME SANTOS COSTA
+![](img/guilherme.jpg)
+
 #### JOSE NATHANAEL SANTOS MATOS 
+![](img/nathan.jpg)
+
 #### PEDRO ANTONIO SANTOS LIMA
+![](img/pedro.jpg)
 
 
 ## License
