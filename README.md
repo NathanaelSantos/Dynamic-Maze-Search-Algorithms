@@ -25,18 +25,15 @@ Before you begin, make sure you have the following installed:
 6. Run the AI-Maze-Game application by running the following command: `python3 game.py`
 
 
-## Como jogar
+## How to Play
+- Use the arrow keys to move the player through the maze.
+- Press the D key to draw a new wall in the maze.
+- Press the F key to finish drawing a wall.
 
-- Use as teclas de seta para mover o jogador pelo labirinto.
-- Pressione a tecla `D` para desenhar uma nova parede no labirinto.
-- Pressione a tecla `F` para finalizar o desenho de uma parede.
+## License
+This project is licensed under the MIT License.
 
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT.```
-
-Lembre-se de substituir as informações do exemplo com as informações relevantes para o seu projeto.
+Remember to replace the example information with relevant information for your project.
 
 
 
