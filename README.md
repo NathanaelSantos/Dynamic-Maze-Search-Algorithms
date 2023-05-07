@@ -3,31 +3,26 @@
 Este é um projeto que implementa um jogo de labirinto simples utilizando a biblioteca Pygame.
 
 ## Requisitos
+## Running AI-Maze-Game with Docker and Xming on Windows
 
-- Python 3
-Para instalar o Python 3, você pode seguir os seguintes passos:
+This guide provides step-by-step instructions for running the AI-Maze-Game application using Docker and Xming on a Windows machine.
 
-Acesse o site oficial do Python em https://www.python.org/downloads/ e faça o download da versão mais recente do Python 3 para o seu sistema operacional.
+### Prerequisites
 
-Siga as instruções do instalador para instalar o Python 3 no seu computador.
+Before you begin, make sure you have the following installed:
 
-- Pygame
-Para instalar o Pygame, você pode usar o gerenciador de pacotes pip, que já vem incluído com a instalação do Python. Para isso, basta seguir os seguintes passos:
+- Docker: [Install Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
+- Xming: [Download Xming](https://sourceforge.net/projects/xming/files/latest/download)
 
-Abra o prompt de comando ou terminal do seu sistema operacional.
+### Instructions
 
-Digite o seguinte comando e pressione Enter para instalar o Pygame:
-`pip install pygame`
-
-## Como executar
-
-1. Clone o repositório em sua máquina
-
-2. Acesse a pasta do projeto
-
-3. Instale as dependências
-
-4. Execute o projeto
+1. Install Xming by running the `Xming-6-9-0-31-setup` installer.
+2. Open a terminal where the Dockerfile is located.
+3. Build the Docker image by running the following command: `docker build -t projetoia .`
+4. Run the Docker container with Xming by running the following command: `docker run -it --name projetoia -e DISPLAY=host.docker.internal:0 projetoia`
+   - Note: Make sure to replace `projetoia` with the name of your Docker image if you used a different name in step 3.
+5. Navigate to the Maze-IA directory by running the following command: `cd AI-Maze-Game/ && cd Maze-IA && ls`
+6. Run the AI-Maze-Game application by running the following command: `python3 game.py`
 
 
 ## Como jogar
