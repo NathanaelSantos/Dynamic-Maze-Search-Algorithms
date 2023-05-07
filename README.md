@@ -37,7 +37,9 @@ Before you begin, make sure you have the following installed:
 | Guilherme Santos Costa  | Jose Nathanael Santos Matos | Pedro Antonio Santos Lima |
 
 
-
+### Disciplina: SINF0042 - INTELIGÊNCIA ARTIFICIAL (2022.2 - TIND01)
+#### Professor: ALCIDES XAVIER BENICASA
+<img src="img/professor.png" alt="Guilherme Santos Costa" width="100" />
 
 ## License
 This project is licensed under the MIT License.
