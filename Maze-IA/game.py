@@ -3,6 +3,7 @@ import csv
 import math
 from constants import *
 import importlib
+import os
 
 os.environ['SDL_AUDIODRIVER'] = 'dummy'
 
