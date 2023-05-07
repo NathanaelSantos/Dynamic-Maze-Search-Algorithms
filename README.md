@@ -25,9 +25,12 @@ Before you begin, make sure you have the following installed:
 
 
 ## How to Play
-- Use the arrow keys to move the player through the maze.
-- Press the D key to draw a new wall in the maze.
-- Press the F key to finish drawing a wall.
+- Press the B key to activate or deactivate the "paint mode" (activated by default).
+- You can draw new walls in the maze by clicking with the left button of the mouse, while the paint mode is activated.
+- After drawing your maze, press the SPACE key to show the search algorithm menu.
+- Select the algorithm by clicking with the left button of the mouse.
+- Enjoy watching.
+
 
 ## Creators
 
