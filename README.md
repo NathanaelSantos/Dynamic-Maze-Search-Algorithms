@@ -30,14 +30,13 @@ Before you begin, make sure you have the following installed:
 - Press the F key to finish drawing a wall.
 
 ## Creators
-#### GUILHERME SANTOS COSTA
-![](img/guilherme.jpg)
 
-#### JOSE NATHANAEL SANTOS MATOS 
-![](img/nathan.jpg)
+|   |  |  |
+| :---------------------:| :------------------------:| :-----------------------:|
+| <img src="img/guilherme.jpg" alt="Guilherme Santos Costa" width="100" /> | <img src="img/nathan.jpg" alt="Jose Nathanael Santos Matos" width="100" /> | <img src="img/pedro.jpg" alt="Pedro Antonio Santos Lima" width="100" /> |
+| Guilherme Santos Costa  | Jose Nathanael Santos Matos | Pedro Antonio Santos Lima |
 
-#### PEDRO ANTONIO SANTOS LIMA
-![](img/pedro.jpg)
+
 
 
 ## License
