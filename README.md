@@ -29,6 +29,12 @@ Before you begin, make sure you have the following installed:
 - Press the D key to draw a new wall in the maze.
 - Press the F key to finish drawing a wall.
 
+## Creators
+#### GUILHERME SANTOS COSTA
+#### JOSE NATHANAEL SANTOS MATOS 
+#### PEDRO ANTONIO SANTOS LIMA
+
+
 ## License
 This project is licensed under the MIT License.
 
