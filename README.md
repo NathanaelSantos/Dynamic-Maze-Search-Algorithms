@@ -1,8 +1,3 @@
-# Labirinto com Pygame
-
-Este é um projeto que implementa um jogo de labirinto simples utilizando a biblioteca Pygame.
-
-## Requisitos
 ## Running AI-Maze-Game with Docker and Xming on Windows
 
 This guide provides step-by-step instructions for running the AI-Maze-Game application using Docker and Xming on a Windows machine.
