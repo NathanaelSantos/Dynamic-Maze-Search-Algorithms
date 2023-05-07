@@ -1,5 +1,6 @@
 import graph_tool.all as gt                       # Biblioteca para GRAFO
 import csv                                        # Biblioteca para Leitura do csv
+from constants import *
 
 
 class VisitorExample(gt.DFSVisitor):                                            # É um objeto visitante que é chamado nos pontos de evento dentro do algoritmo bfs_search()
@@ -62,7 +63,7 @@ f_network.close()
 # Lista de arestas criadas
 print(g.get_edges())
 
-'''#Desenhando o grafo
+#Desenhando o grafo
 gt.graph_draw(g, #pos=gt.arf_layout(visual_G),
                vertex_text= v_name,
                #edge_text = e_action,
@@ -72,7 +73,7 @@ gt.graph_draw(g, #pos=gt.arf_layout(visual_G),
                vertex_shape="circle",
                vertex_fill_color="#729fcf",
                output_size=(6000, 6000),
-               output="Outputs/Grafo.png")'''
+               output="Outputs/Grafo.png")
 
 #Busca em Profundidade (bfs) e geração das arestas
 g_dfs = gt.Graph()                                      # criação do objeto para busca em Profundidade
@@ -88,8 +89,11 @@ e_action_dfs = g_dfs.new_edge_property("string")
 print("------------------------------------------------------")
 print("> Busca em Profundidade - Caminhamento pelos Estados")
 print("------------------------------------------------------\n")
+
+final_pos = (row_final, col_final)
+
 raiz = '(0, 0)'
-alvo = '(11, 15)'
+alvo = str(final_pos)
 index_raiz = list(v_name).index(raiz)
 
 gt.dfs_search(g, g.vertex(index_raiz), VisitorExample(v_name_dfs, pred, dist, time, v_name_time, color, v_color, e_action_dfs))
@@ -119,20 +123,20 @@ v_color[index_raiz] = "#729fcf"; print("Cores Vértices.........:", list(v_color
 
 print("Caminho encontrado.....:",path)                   # mostrando o caminho encontrado da raiz ao alvo
 
-'''#Desenhando o grafo
+#Desenhando o grafo
 gt.graph_draw(g_dfs, #pos=gt.sfdp_layout(g_dfs),
               vertex_size = 80,
               vertex_text= v_name_dfs,
               edge_text= e_action_dfs,
               edge_color= color,
               vertex_font_size=18,
-              edge_font_size = 10,      # Comentado por erro de RGBA
+              edge_font_size = 10,      
               edge_pen_width = 10,
-              vertex_fill_color=v_color,              
+              #vertex_fill_color=v_color,              
               vertex_shape="circle",
-              #vertex_fill_color="#729fcf",
+              vertex_fill_color="#729fcf",
               output_size=(6000, 6000),
-              output="Outputs/BuscaProfundidade.png") ''' 
+              output="Outputs/BuscaProfundidade.png")
 
 string_list = '\n'.join(path) + '\n'
 with open('Outputs/dfs_path.txt', 'w') as file:

@@ -1,5 +1,6 @@
 import numpy as np
 import csv
+from constants import *
 
 def read_csv():
     states = []
@@ -81,7 +82,7 @@ for state in states:
     position = list(state)
     rewards[position[0]][position[1]] = -1
 
-rewards[11][15] = 100
+rewards[row_final][col_final] = 100
 
 for episode in range(1000):
     row_index, column_index = get_starting_location()
