@@ -38,8 +38,12 @@ Before you begin, make sure you have the following installed:
 
 
 ### Disciplina: SINF0042 - INTELIGÊNCIA ARTIFICIAL (2022.2 - TIND01)
-#### Professor: ALCIDES XAVIER BENICASA
-<img src="img/professor.png" alt="Guilherme Santos Costa" width="100" />
+### Professor:
+|   |  
+| :---------------------:|
+| <img src="img/professor.png" alt="ALCIDES XAVIER BENICASA" width="100" /> | width="100" /> |
+| ALCIDES XAVIER BENICASA  |
+
 
 ## License
 This project is licensed under the MIT License.
