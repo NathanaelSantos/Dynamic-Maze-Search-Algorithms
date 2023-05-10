@@ -3,6 +3,11 @@ white = (255, 255, 255)
 red = (255, 0, 0)
 black = (0, 0, 0)
 blue = (0, 0, 255)
+yellow = (255, 255, 0)
+green = (0, 255, 0)
+purple = (128,0,128)
+buscaAestrelaColor = (223, 198, 99)
+qLearningColor = (128, 193, 71)
 
 # definindo a posição inicial do quadrado
 x = 0
