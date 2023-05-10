@@ -228,6 +228,8 @@ def menu():
                     menu_running = False
                     importlib.import_module('buscaProfundidade')
                     read_file_path(open("Outputs/dfs_path.txt", "r"))
+
+                    Color.set_algoritmo_name('buscaProfundidade')
                     # atualiza a cor
                     Color.set_color(green)
 
@@ -237,6 +239,8 @@ def menu():
                     menu_running = False
                     importlib.import_module('buscaLargura')
                     read_file_path(open("Outputs/bfs_path.txt", "r"))
+                    
+                    Color.set_algoritmo_name('buscaLargura')
                     # atualiza a cor
                     Color.set_color(blue)
 
@@ -245,8 +249,10 @@ def menu():
                     menu_running = False
                     importlib.import_module('buscaCustoUni')
                     read_file_path(open("Outputs/djkistra_path.txt", "r"))
+
+                    Color.set_algoritmo_name('buscaCustoUniforme')
                     # atualiza a cor
-                    Color.set_color(red)
+                    Color.set_color(buscaCustoUniformeColor)
 
                 # Verifica se clicou no botão "Busca Gulosa"
                 elif 280 <= mouse_pos[0] <= 560 and 205 <= mouse_pos[1] <= 250:
