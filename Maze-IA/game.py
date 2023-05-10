@@ -230,8 +230,7 @@ def menu():
                     read_file_path(open("Outputs/dfs_path.txt", "r"))
 
                     Color.set_algoritmo_name('buscaProfundidade')
-                    # atualiza a cor
-                    Color.set_color(green)
+                    Color.set_color(buscaProfundidadeColor)
 
                 # Verifica se clicou no botão "Busca em Largura"
                 elif 280 <= mouse_pos[0] <= 560 and 105 <= mouse_pos[1] <= 150:
@@ -241,8 +240,7 @@ def menu():
                     read_file_path(open("Outputs/bfs_path.txt", "r"))
                     
                     Color.set_algoritmo_name('buscaLargura')
-                    # atualiza a cor
-                    Color.set_color(blue)
+                    Color.set_color(buscaLarguraColor)
 
                 # Verifica se clicou no botão "Busca por Custo Uniforme"
                 elif 280 <= mouse_pos[0] <= 560 and 155 <= mouse_pos[1] <= 200:
