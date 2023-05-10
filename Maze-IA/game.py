@@ -387,12 +387,6 @@ while running:
             # Desenha a superfície na tela
             screen.blit(cell_surf, (j * cell_size, i * cell_size))
 
-    # desenhando as linhas do labirinto
-    for i in range(len(maze)):
-        pygame.draw.line(screen, black, (0, i * cell_size), (screen_width, i * cell_size))
-    for j in range(len(maze[0])):
-        pygame.draw.line(screen, black, (j * cell_size, 0), (j * cell_size, screen_height))
-
     # desenhando o quadrado vermelho
     rect = pygame.Rect(x, y, 50, 50)
     pygame.draw.rect(screen, red, rect)
@@ -400,6 +394,12 @@ while running:
     for coord in visited_coords:
         visited_rect = pygame.Rect(coord[1] * cell_size, coord[0] * cell_size, cell_size, cell_size)
         pygame.draw.rect(screen, Color.get_color(), visited_rect) 
+ 
+    # desenhando as linhas do labirinto
+    for i in range(len(maze)):
+        pygame.draw.line(screen, black, (0, i * cell_size), (screen_width, i * cell_size))
+    for j in range(len(maze[0])):
+        pygame.draw.line(screen, black, (j * cell_size, 0), (j * cell_size, screen_height))
 
     # atualizando a tela
     pygame.display.update()
