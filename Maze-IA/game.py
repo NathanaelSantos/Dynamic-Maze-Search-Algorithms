@@ -52,6 +52,27 @@ coord_list = []
 # Define se o modo de pintura está ativo ou não
 paint_mode = True
 
+class Color:
+    color = (255, 255, 255)
+    algoritmo = ""
+
+    @staticmethod
+    def get_color():
+        return Color.color
+    
+    @staticmethod
+    def set_color(new_color):
+        Color.color = new_color
+
+    @staticmethod
+    def get_algoritmo_name():
+        return Color.algoritmo
+    
+    @staticmethod
+    def set_algoritmo_name(new_algoritmo):
+        Color.algoritmo = new_algoritmo
+
+
 def draw_menu():
     menu_screen.fill(white)
 
@@ -207,36 +228,51 @@ def menu():
                     menu_running = False
                     importlib.import_module('buscaProfundidade')
                     read_file_path(open("Outputs/dfs_path.txt", "r"))
+                    # atualiza a cor
+                    Color.set_color(green)
 
                 # Verifica se clicou no botão "Busca em Largura"
                 elif 280 <= mouse_pos[0] <= 560 and 105 <= mouse_pos[1] <= 150:
+                    cor = 1
                     menu_running = False
                     importlib.import_module('buscaLargura')
                     read_file_path(open("Outputs/bfs_path.txt", "r"))
+                    # atualiza a cor
+                    Color.set_color(blue)
 
                 # Verifica se clicou no botão "Busca por Custo Uniforme"
                 elif 280 <= mouse_pos[0] <= 560 and 155 <= mouse_pos[1] <= 200:
                     menu_running = False
                     importlib.import_module('buscaCustoUni')
                     read_file_path(open("Outputs/djkistra_path.txt", "r"))
+                    # atualiza a cor
+                    Color.set_color(red)
 
                 # Verifica se clicou no botão "Busca Gulosa"
                 elif 280 <= mouse_pos[0] <= 560 and 205 <= mouse_pos[1] <= 250:
                     menu_running = False
                     importlib.import_module('buscaGulosa')
                     read_file_path(open("Outputs/greedy_path.txt", "r"))
+                    # atualiza a cor
+                    Color.set_color(purple)
 
                 # Verifica se clicou no botão "Busca A*"
                 elif 280 <= mouse_pos[0] <= 560 and 255 <= mouse_pos[1] <= 300:
                     menu_running = False
                     importlib.import_module('buscaAestrela')
                     read_file_path(open("Outputs/A_star_path.txt", "r"))
+                    
+                    Color.set_algoritmo_name('buscaAestrela')
+                    Color.set_color(buscaAestrelaColor)
 
                 # Verifica se clicou no botão "Q-Learning"
                 elif 280 <= mouse_pos[0] <= 560 and 305 <= mouse_pos[1] <= 350:
                     menu_running = False
                     importlib.import_module('qLearning')
                     read_file_path(open("Outputs/qLearning_path.txt", "r"))
+                    
+                    Color.set_algoritmo_name('qLearning')
+                    Color.set_color(qLearningColor)
 
                 # Verifica se clicou no botão "Sair"
                 elif 280 <= mouse_pos[0] <= 560 and 355 <= mouse_pos[1] <= 400:
@@ -252,6 +288,7 @@ coord_index = 0
 
 # loop principal do jogo
 running = True
+visited_coords = []  # Definindo a lista de coordenadas visitadas
 while running:
 
     # eventos do teclado
@@ -310,7 +347,18 @@ while running:
         else:
             # Se o jogador chegou às coordenadas atuais, atualize o índice e insira um delay
             coord_index += 1
+            visited_coords.append((current_coord[0], current_coord[1]))  # Adicionando as coordenadas visitadas
             pygame.time.delay(500)  # Delay de 500ms (0.5s)
+        
+            # Verifica se o jogador chegou à coordenada final
+            if current_coord == (row_final, col_final):
+                current_dir = os.path.abspath(os.path.dirname(__file__))
+                image_dir = "img"
+                full_path = os.path.join(current_dir, image_dir)
+                # save the image with the full path
+                pygame.image.save(screen, os.path.join(full_path, Color.get_algoritmo_name() + ".png"))
+                print("Print tirado e imagem salva com sucesso!")
+                visited_coords = []  # redefine a lista de coordenadas visitadas para vazia
 
 
     # definindo a cor de fundo
@@ -343,7 +391,10 @@ while running:
     # desenhando o quadrado vermelho
     rect = pygame.Rect(x, y, 50, 50)
     pygame.draw.rect(screen, red, rect)
-
+ 
+    for coord in visited_coords:
+        visited_rect = pygame.Rect(coord[1] * cell_size, coord[0] * cell_size, cell_size, cell_size)
+        pygame.draw.rect(screen, Color.get_color(), visited_rect) 
 
     # atualizando a tela
     pygame.display.update()
