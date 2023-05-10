@@ -5,7 +5,7 @@ black = (0, 0, 0)
 blue = (0, 0, 255)
 yellow = (255, 255, 0)
 green = (0, 255, 0)
-purple = (128,0,128)
+buscaGulosaColor = (255, 101, 153)
 buscaAestrelaColor = (223, 198, 99)
 qLearningColor = (128, 193, 71)
 

@@ -253,8 +253,9 @@ def menu():
                     menu_running = False
                     importlib.import_module('buscaGulosa')
                     read_file_path(open("Outputs/greedy_path.txt", "r"))
-                    # atualiza a cor
-                    Color.set_color(purple)
+                    
+                    Color.set_algoritmo_name('buscaGulosa')
+                    Color.set_color(buscaGulosaColor)
 
                 # Verifica se clicou no botão "Busca A*"
                 elif 280 <= mouse_pos[0] <= 560 and 255 <= mouse_pos[1] <= 300:
