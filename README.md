@@ -17,7 +17,7 @@ Before you begin, make sure you have the following installed:
 
 ### Instructions
 
-1. Install Xming by running the `Xming-6-9-0-31-setup` installer.
+1. Install Xming by running the `Xming-6-9-0-31-setup.exe` installer.
 2. Open a terminal where the Dockerfile is located.
 3. Build the Docker image by running the following command: `docker build -t projetoia .`
 4. Run the Docker container with Xming by running the following command: `docker run -it --name projetoia -e DISPLAY=host.docker.internal:0 projetoia`
