@@ -29,13 +29,13 @@ Before you begin, make sure you have the following installed:
 <img src="img/fedora.png" alt="Imagem Docker" align="center" width="120">
 
 ## Install on Fedora 
-#### Instale as dependências necessárias para instalar o Miniconda
+#### Install the necessary dependencies to install Miniconda
 1. `sudo dnf install -y wget bzip2 ca-certificates curl glib2 libXext libSM libXrender`
-#### Baixe o arquivo .sh do Miniconda
+#### Download the Miniconda .sh file
 2. `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
-#### Instale o Miniconda em /opt/conda
+#### Install Miniconda in /opt/conda
 3. `sudo /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \ rm Miniconda3-latest-Linux-x86_64.sh`
-#### Instale as dependências do Graph Tool e Pygame
+#### Install Graph Tool, Pygame and numpy dependencies
 4. `sudo dnf install -y cairo-devel GraphicsMagick-c++-devel boost-devel libxml2-devel`
 #### Install
 5. `conda install -y -c conda-forge graph-tool`
