@@ -1,6 +1,8 @@
 ![](Maze-IA/Play.png)
 
 ![](Maze-IA/meu.png)
+<img src="img/qLearning.png" align="center" width="400">
+<img src="img/buscaAestrela.png" align="center" width="400">
 
 <img src="img/docker.png" alt="Imagem Docker" align="center" width="120">
 
