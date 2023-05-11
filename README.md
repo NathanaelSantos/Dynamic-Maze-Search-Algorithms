@@ -96,7 +96,8 @@ make the clone: `git clone https://github.com/NathanaelSantos/AI-Maze-Game.git`
 |   |  |  |
 | :---------------------:| :------------------------:| :-----------------------:|
 | <img src="img/guilherme.jpg" alt="Guilherme Santos Costa" width="100" /> | <img src="img/nathan.jpg" alt="Jose Nathanael Santos Matos" width="100" /> | <img src="img/pedro.jpg" alt="Pedro Antonio Santos Lima" width="100" /> |
-| Guilherme Santos Costa  | Jose Nathanael Santos Matos | Pedro Antonio Santos Lima |
+| <b>Guilherme Santos Costa</b> <br> Bacharel em Sistemas de Informação | <b>José Nathanael Santos Matos</b> <br> Bacharel em Sistemas de Informação | <b>Pedro Antonio Santos Lima</b> <br> Bacharel em Sistemas de Informação |
+
 
 
 ### Disciplina: SINF0042 - INTELIGÊNCIA ARTIFICIAL (2022.2 - TIND01)
@@ -104,7 +105,7 @@ make the clone: `git clone https://github.com/NathanaelSantos/AI-Maze-Game.git`
 |   |  
 | :---------------------:|
 | <img src="img/professor.png" alt="ALCIDES XAVIER BENICASA" width="100" /> | width="100" /> |
-| ALCIDES XAVIER BENICASA  |
+| <b>ALCIDES XAVIER BENICASA</b> <br> Departamento: Sistemas de Informação - DSI/UFS |
 
 
 ## License
