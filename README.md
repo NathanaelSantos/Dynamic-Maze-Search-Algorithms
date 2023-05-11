@@ -2,7 +2,7 @@
 
 ![](Maze-IA/meu.png)
 
-<img src="img/docker.png" alt="Imagem Docker" align="left" width="120">
+<img src="img/docker.png" alt="Imagem Docker" align="center" width="120">
 
 ## Running AI-Maze-Game with Docker and Xming on Windows
 
@@ -25,6 +25,25 @@ Before you begin, make sure you have the following installed:
 5. Navigate to the Maze-IA directory by running the following command: `cd AI-Maze-Game/ && cd Maze-IA && ls`
 6. Run the AI-Maze-Game application by running the following command: `python3 game.py`
 
+
+<img src="img/fedora.png" alt="Imagem Docker" align="center" width="120">
+
+## Install on Fedora 
+#### Instale as dependências necessárias para instalar o Miniconda
+1. `sudo dnf install -y wget bzip2 ca-certificates curl glib2 libXext libSM libXrender`
+#### Baixe o arquivo .sh do Miniconda
+2. `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
+#### Instale o Miniconda em /opt/conda
+3. `sudo /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \ rm Miniconda3-latest-Linux-x86_64.sh`
+#### Instale as dependências do Graph Tool e Pygame
+4. `sudo dnf install -y cairo-devel GraphicsMagick-c++-devel boost-devel libxml2-devel`
+#### Install
+5. `conda install -y -c conda-forge graph-tool`
+6. `conda install -y -c conda-forge pygame`
+7. `conda install -y numpy`
+
+make the clone: `git clone https://github.com/NathanaelSantos/AI-Maze-Game.git`
+inside the folder, run: `conda activate`
 
 ## How to Play
 - Press the B key to activate or deactivate the "paint mode" (activated by default).
