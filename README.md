@@ -2,6 +2,8 @@
 
 ![](Maze-IA/meu.png)
 
+<img src="img/docker.png" alt="Imagem Docker" align="left" width="120">
+
 ## Running AI-Maze-Game with Docker and Xming on Windows
 
 This guide provides step-by-step instructions for running the AI-Maze-Game application using Docker and Xming on a Windows machine.
