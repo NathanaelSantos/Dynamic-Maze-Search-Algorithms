@@ -1,8 +1,40 @@
 ![](Maze-IA/Play.png)
 
 ![](Maze-IA/meu.png)
-<img src="img/qLearning.png" align="center" width="400">
-<img src="img/buscaAestrela.png" align="center" width="400">
+
+<table>
+  <tr>
+    <td>
+      <h4>Q-Learning</h4>
+      <img src="img/qLearning.png" align="left" width="400">
+    </td>
+    <td>
+      <h4>Depth-First Search</h4>
+      <img src="img/buscaProfundidade.png" align="right" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h4>Breadth-First Search</h4>
+      <img src="img/buscaLargura.png" align="left" width="400">
+    </td>
+    <td>
+      <h4>Greedy Best-First Search</h4>
+      <img src="img/buscaGulosa.png" align="right" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h4>Uniform Cost Search</h4>
+      <img src="img/buscaCustoUniforme.png" align="left" width="400">
+    </td>
+    <td>
+      <h4>A-star Search</h4>
+      <img src="img/buscaAestrela.png" align="right" width="400">
+    </td>
+  </tr>
+</table> 
+
 
 <img src="img/docker.png" alt="Imagem Docker" align="center" width="120">
 
