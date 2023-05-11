@@ -134,6 +134,43 @@ def draw_menu():
     pygame.display.update()
 
 
+def menuInicial():
+    menu_screen.fill(white)
+
+    # desenha um texto "Jogar"
+    font = pygame.font.Font(None, 25)
+
+    # desenha um botão "Importar Save"
+    pygame.draw.rect(menu_screen, blue, (280, 55, 280, 45))
+
+    # desenha um texto "Importar Save"
+    text = font.render("Importar Save", True, white)
+    menu_screen.blit(text, (320, 70))
+
+    # desenha um botão "Desenhar Manualmente"
+    pygame.draw.rect(menu_screen, blue, (280, 105, 280, 45))
+
+    # desenha um texto "Desenhar Manualmente"
+    text = font.render("Desenhar Manualmente", True, white)
+    menu_screen.blit(text, (310, 120))
+
+    # desenha um botão "Gerar Labirinto Automático"
+    pygame.draw.rect(menu_screen, blue, (280, 155, 280, 45))
+
+    # desenha um texto "Gerar Labirinto Automático"
+    text = font.render("Gerar Labirinto Automático", True, white)
+    menu_screen.blit(text, (285, 170))
+
+    # desenha um botão "Sair"
+    pygame.draw.rect(menu_screen, red, (280, 355, 280, 45))
+
+    # desenha um texto "Sair"
+    text = font.render("Sair", True, white)
+    menu_screen.blit(text, (405, 370))
+
+    pygame.display.update()
+
+
 
 def draw_cell(row, col):
     cell_surf = pygame.Surface((cell_size, cell_size))
@@ -213,6 +250,7 @@ def read_file_path(arquivo):
     return coord_list
 
 
+
 def menu():
     # loop principal do menu
     menu_running = True
@@ -290,12 +328,59 @@ def menu():
 # Defina a velocidade de movimentação e o índice atual da lista de coordenadas
 coord_index = 0
 
+# exibe a tela de menu inicial
+
+def menuInicial():
+    menu_screen.fill(white)
+
+    # desenha um texto "Jogar"
+    font = pygame.font.Font(None, 25)
+
+    # desenha um botão "Importar Save"
+    pygame.draw.rect(menu_screen, blue, (280, 55, 280, 45))
+
+    # desenha um texto "Importar Save"
+    text = font.render("Importar Save", True, white)
+    menu_screen.blit(text, (320, 70))
+
+    # desenha um botão "Desenhar Manualmente"
+    pygame.draw.rect(menu_screen, blue, (280, 105, 280, 45))
+
+    # desenha um texto "Desenhar Manualmente"
+    text = font.render("Desenhar Manualmente", True, white)
+    menu_screen.blit(text, (310, 120))
+
+
+    # desenha um botão "Sair"
+    pygame.draw.rect(menu_screen, red, (280, 355, 280, 45))
+
+    # desenha um texto "Sair"
+    text = font.render("Sair", True, white)
+    menu_screen.blit(text, (405, 370))
+
+    pygame.display.update()
+
+    # loop para esperar um clique do mouse
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                waiting = False
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if 280 <= x <= 560 and 105 <= y <= 150:  # verifica se o botão "Desenhar Manualmente" foi clicado
+                    waiting = False
+                    running = True
+                elif 280 <= x <= 560 and 355 <= y <= 400:  # verifica se o botão "Sair" foi clicado
+                    pygame.quit()
+
+menuInicial()
 
 # loop principal do jogo
 running = True
 visited_coords = []  # Definindo a lista de coordenadas visitadas
 while running:
-
     # eventos do teclado
     for event in pygame.event.get():
 
