@@ -11,7 +11,7 @@ This guide provides step-by-step instructions for running the AI-Maze-Game appli
 Before you begin, make sure you have the following installed:
 
 - Docker: [Install Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
-- Xming: [Download Xming](https://sourceforge.net/projects/xming/files/latest/download)
+- Xming: Xming-6-9-0-31-setup.exe
 
 ### Instructions
 
