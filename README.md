@@ -33,17 +33,21 @@ Before you begin, make sure you have the following installed:
 1. `sudo dnf install -y wget bzip2 ca-certificates curl glib2 libXext libSM libXrender`
 #### Download the Miniconda .sh file
 2. `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
-#### Install Miniconda in /opt/conda
-3. `sudo /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \ rm Miniconda3-latest-Linux-x86_64.sh`
-#### Install Graph Tool, Pygame and numpy dependencies
-4. `sudo dnf install -y cairo-devel GraphicsMagick-c++-devel boost-devel libxml2-devel`
-#### Install
-5. `conda install -y -c conda-forge graph-tool`
-6. `conda install -y -c conda-forge pygame`
-7. `conda install -y numpy`
+#### Install Miniconda in  /home/youruser/miniconda3
+3. `bash Miniconda3-latest-Linux-x86_64.sh -b -p /home/youruser/miniconda3`
+#### add Miniconda's bin directory to your PATH:
+4. `echo 'export PATH="/home/youruser/miniconda3/bin:$PATH"' >> ~/.bashrc`
+#### Activate the Conda base environment by running the following command:
+5. `source /home/youruser/miniconda3/bin/activate`
+6. `(base) [youruser]$ conda install -y -c conda-forge graph-tool`
+7. `(base) [youruser]$ conda install -y -c conda-forge pygame`
+8. `(base) [youruser]$ conda install -y numpy`
 
 make the clone: `git clone https://github.com/NathanaelSantos/AI-Maze-Game.git`
-inside the folder, run: `conda activate`
+
+`(base) [nathan]$ cd AI-Maze-Game/`
+`(base) [nathan AI-Maze-Game]$ cd Maze-IA/`
+`(base) [nathan Maze-IA]$ python3 game.py`
 
 ## How to Play
 - Press the B key to activate or deactivate the "paint mode" (activated by default).
