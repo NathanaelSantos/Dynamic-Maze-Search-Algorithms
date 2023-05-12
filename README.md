@@ -86,6 +86,7 @@ make the clone: `git clone https://github.com/NathanaelSantos/AI-Maze-Game.git`
 ## How to Play
 - Press the B key to activate or deactivate the "paint mode" (activated by default).
 - You can draw new walls in the maze by clicking with the left button of the mouse, while the paint mode is activated.
+- Press the S key to save a maze file. You can open it in the option "Import save".
 - After drawing your maze, press the SPACE key to show the search algorithm menu.
 - Select the algorithm by clicking with the left button of the mouse.
 - Enjoy watching.
