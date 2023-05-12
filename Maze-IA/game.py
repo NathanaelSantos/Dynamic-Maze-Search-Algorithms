@@ -4,6 +4,12 @@ import math
 from constants import *
 import importlib
 import os
+import pickle
+import tkinter as tk
+from tkinter import filedialog
+import sys
+import threading
+
 
 os.environ['SDL_AUDIODRIVER'] = 'dummy'
 
@@ -250,6 +256,41 @@ def read_file_path(arquivo):
     return coord_list
 
 
+def popup():
+    # Obtem o caminho absoluto para o diretório atual
+    current_dir = os.getcwd()
+
+    # Define o caminho completo para o arquivo de saída
+    directory = os.path.join(current_dir, "saves")
+
+    output_file = filedialog.asksaveasfilename(initialdir=directory, title="Salvar arquivo", filetypes=(("Arquivo de texto", "*.txt"),))
+
+    return output_file
+
+def updateMazeWithSave(file_path):
+    with open(file_path, "r") as f:
+        # lê as coordenadas do arquivo de save
+        coordinates = [tuple(map(int, line.strip().strip("()").split(", "))) for line in f.readlines()]
+        
+        # atualiza a matriz com as coordenadas
+        for row, col in coordinates:
+            maze[row][col] = (row, col, 1)
+
+def getSavedFile():
+    # obtém o diretório atual do script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    saves_dir = os.path.join(current_dir, "saves")
+
+    # abre uma janela de seleção de arquivo
+    root = tk.Tk()
+    root.withdraw()
+    new_file_path = filedialog.askopenfilename(initialdir=saves_dir, title="Selecione o arquivo de save", filetypes=[("Arquivos de Save", "*.txt")])
+    
+    root.destroy()
+    if new_file_path:
+        updateMazeWithSave(new_file_path)
+        file_path = new_file_path
+    return file_path
 
 def menu():
     # loop principal do menu
@@ -369,11 +410,20 @@ def menuInicial():
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
-                if 280 <= x <= 560 and 105 <= y <= 150:  # verifica se o botão "Desenhar Manualmente" foi clicado
+                if 280 <= x <= 560 and 55 <= y <= 100:  # verifica se o botão "Importar Save" foi clicado 
+                    threading.Thread(target=getSavedFile).start()
+                elif 280 <= x <= 560 and 105 <= y <= 150:  # verifica se o botão "Desenhar Manualmente" foi clicado
                     waiting = False
                     running = True
                 elif 280 <= x <= 560 and 355 <= y <= 400:  # verifica se o botão "Sair" foi clicado
-                    pygame.quit()
+                    if file_path:
+                        # se o arquivo foi selecionado e o usuário clicou em "Sair", exibe uma mensagem antes de fechar o jogo
+                        if messagebox.askyesno("Sair", "Tem certeza que deseja sair? Seu progresso não será salvo."):
+                            pygame.quit()
+                    else:
+                        pygame.quit()
+
+
 
 menuInicial()
 
@@ -404,6 +454,11 @@ while running:
                 paint_mode = False
                 menu()
 
+            elif event.key == pygame.K_s:
+                # Abre o arquivo de saída em modo de escrita
+                with open(popup(), "w") as f:
+                    for coord in painted_coords:
+                        f.write(str(coord) + "\n")
 
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and paint_mode:  # detecta o clique do mouse no modo de pintura
@@ -457,18 +512,22 @@ while running:
     cell_size = 50
 
     # loop que percorre toda a matriz e desenha cada célula com base em seu estado atual
+    painted_coords = []
     for i in range(len(maze)):
         for j in range(len(maze[0])):
             # Cria uma nova superfície com as mesmas dimensões da casa
             cell_surf = pygame.Surface((cell_size, cell_size))
-            # Preenche a superfície com a cor azul se a casa estiver marcada
-            if maze[i][j][2] == 1:
+            # Preenche a superfície com a cor branca por padrão
+            cell_surf.fill(white)
+            # Verifica se a célula é a célula final
+            if maze[i][j] == maze[row_final][col_final]:
+                # Preenche a superfície com a cor de fim de jogo
+                cell_surf.fill(endpointColor)
+            # Verifica se a célula está marcada
+            elif maze[i][j][2] == 1:
+                # Preenche a superfície com a cor azul
                 cell_surf.fill(blue)
-            elif maze[i][j] == maze[row_final][col_final]:
-                cell_surf.fill((80, 200, 120))
-            # Preenche a superfície com a cor branca se a casa não estiver marcada
-            else:
-                cell_surf.fill(white)
+                painted_coords.append((i, j))
             # Desenha a superfície na tela
             screen.blit(cell_surf, (j * cell_size, i * cell_size))
 
