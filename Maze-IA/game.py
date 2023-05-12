@@ -412,6 +412,8 @@ def menuInicial():
                 x, y = event.pos
                 if 280 <= x <= 560 and 55 <= y <= 100:  # verifica se o botão "Importar Save" foi clicado 
                     threading.Thread(target=getSavedFile).start()
+                    waiting = False
+                    running = True
                 elif 280 <= x <= 560 and 105 <= y <= 150:  # verifica se o botão "Desenhar Manualmente" foi clicado
                     waiting = False
                     running = True
