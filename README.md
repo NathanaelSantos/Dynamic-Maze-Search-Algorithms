@@ -1,3 +1,13 @@
+## Labirinto dinâmico com visualização interativa de algoritmos de busca
+
+Um labirinto dinâmico foi criado para permitir que os usuários experimentem diferentes algoritmos de busca. O labirinto é gerado aleatoriamente pelo usuário, e os mesmos podem escolher um ponto de início e um ponto de destino. Em seguida, podem selecionar um algoritmo de busca, como busca em largura, busca em profundidade, busca A* e etc.
+
+À medida que a busca ocorre, o caminho percorrido é destacado com cores diferentes. Isso permite que os usuários visualizem o processo de busca de forma clara e interativa.
+
+Disciplina: SINF0042 - INTELIGÊNCIA ARTIFICIAL (2022.2 - TIND01)
+
+
+
 ![](Maze-IA/Play.png)
 
 ![](Maze-IA/meu.png)
