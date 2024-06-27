@@ -13,39 +13,48 @@ Course: SINF0042 - ARTIFICIAL INTELLIGENCE (2022.2 - TIND01)
 ---
 
 ![](Maze-IA/meu.png)
-
+---
+### Search Algorithm Visualizations
 <table>
   <tr>
     <td>
       <h4>Q-Learning</h4>
-      <img src="img/qLearning.png" align="left" width="400">
+      <img src="img/qLearning.png" width="400">
+      <p style="width: 400px;">Q-Learning is a reinforcement learning algorithm that learns the value of actions in a given state to maximize the total reward over time.</p>
     </td>
     <td>
       <h4>Depth-First Search</h4>
-      <img src="img/buscaProfundidade.png" align="right" width="400">
+      <img src="img/buscaProfundidade.png" width="400">
+      <p style="width: 400px;">Depth-First Search (DFS) explores a graph or tree by starting at the root and exploring as far as possible along each branch before backtracking.</p>
     </td>
   </tr>
   <tr>
     <td>
       <h4>Breadth-First Search</h4>
-      <img src="img/buscaLargura.png" align="left" width="400">
+      <img src="img/buscaLargura.png" width="400">
+      <p style="width: 400px;">Breadth-First Search (BFS) traverses or searches tree or graph data structures by exploring all the neighbor nodes at the present depth prior to moving on to nodes at the next depth level.</p>
     </td>
     <td>
       <h4>Greedy Best-First Search</h4>
-      <img src="img/buscaGulosa.png" align="right" width="400">
+      <img src="img/buscaGulosa.png" width="400">
+      <p style="width: 400px;">Greedy Best-First Search expands the most promising node according to a specified rule, aiming to reach the goal by always expanding the node that appears to be closest to the goal.</p>
     </td>
   </tr>
   <tr>
     <td>
       <h4>Uniform Cost Search</h4>
-      <img src="img/buscaCustoUniforme.png" align="left" width="400">
+      <img src="img/buscaCustoUniforme.png" width="400">
+      <p style="width: 400px;">Uniform Cost Search extends the breadth-first search to handle varying edge costs, always expanding the node with the lowest path cost.</p>
     </td>
     <td>
       <h4>A-star Search</h4>
-      <img src="img/buscaAestrela.png" align="right" width="400">
+      <img src="img/buscaAestrela.png" width="400">
+      <p style="width: 400px;">A-star (A*) Search combines elements of both uniform cost search and greedy best-first search to find the most efficient path to the goal using both the cost to reach the node and an estimated cost to reach the goal.</p>
     </td>
   </tr>
-</table> 
+</table>
+
+---
 
 
 <img src="img/docker.png" alt="Imagem Docker" align="center" width="120">
