@@ -10,6 +10,11 @@ As the search progresses, the path taken is highlighted with different colors. T
 
 Course: SINF0042 - ARTIFICIAL INTELLIGENCE (2022.2 - TIND01)
 
+
+
+https://github.com/NathanaelSantos/Dynamic-Maze-Search-Algorithms/assets/45519156/19e17396-4e67-4cb0-ae7a-c3f1397af9df
+
+
 ---
 
 ![](Maze-IA/meu.png)
