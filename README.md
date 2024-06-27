@@ -98,64 +98,64 @@ make the clone: `git clone https://github.com/NathanaelSantos/AI-Maze-Game.git`
 ---
 <img src="img/ubuntu.png" alt="Img fedora" align="center" width="120">
 
-## Instalação e Execução do AI-Maze-Game no Ubuntu
+## Installation and Execution of AI-Maze-Game on Ubuntu
 
-## Pré-requisitos
-Antes de iniciar, certifique-se de que você possui os seguintes pré-requisitos:
-- Ubuntu (qualquer versão recente)
-- Acesso à internet
+## Prerequisites
+Before starting, make sure you have the following prerequisites:
+- Ubuntu (any recent version)
+- Internet access
 
 ## Passos para Instalação
 
-### 1. Instalar Dependências Necessárias
-Primeiro, precisamos instalar algumas dependências necessárias para a instalação do Miniconda.
+### 1. Install Necessary Dependencies
+First, we need to install some necessary dependencies for the installation of Miniconda.
 
 ```
 sudo apt-get update
 sudo apt-get install -y wget bzip2 ca-certificates curl libglib2.0-0 libxext6 libsm6 libxrender1
 ```
 
-## 2. Baixar Miniconda
-Baixe o instalador do Miniconda usando o comando wget.
+## 2. Download Miniconda
+Download the Miniconda installer using the wget command.
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
-## 3. Instalar Miniconda
-Execute o script de instalação do Miniconda e instale-o no diretório /home/seuusuario/miniconda3.
+## 3. Install Miniconda
+Run the Miniconda installation script and install it in the /home/yourusername/miniconda3 directory.
 
 ```
 bash Miniconda3-latest-Linux-x86_64.sh -b -p /home/seuusuario/miniconda3
 ```
 
-## 4. Configurar o PATH
-Adicione o diretório bin do Miniconda ao seu PATH para que os comandos do Conda sejam reconhecidos.
+## 4. Configure the PATH
+Add the Miniconda bin directory to your PATH so that Conda commands are recognized.
 ```
 echo 'export PATH="/home/seuusuario/miniconda3/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## 5. Ativar o Ambiente Conda
-Ative o ambiente base do Conda.
+## 5. Activate the Conda Environment
+Activate the base Conda environment.
 ```
 source /home/seuusuario/miniconda3/bin/activate
 ```
 
-## 6. Instalar Pacotes Necessários
-Use o Conda para instalar os pacotes necessários: graph-tool, pygame e numpy.
+## 6. Install Necessary Packages
+Use Conda to install the necessary packages: graph-tool, pygame, and numpy.
 ```
 conda install -y -c conda-forge graph-tool
 conda install -y -c conda-forge pygame
 conda install -y numpy
 ```
 
-## 7. Clonar o Repositório AI-Maze-Game
-Clone o repositório do AI-Maze-Game do GitHub.
+## 7. Clone the AI-Maze-Game Repository
+Clone the AI-Maze-Game repository from GitHub.
 ```
 git clone https://github.com/NathanaelSantos/AI-Maze-Game.git
 ```
 
-## 8. Executar o Jogo
-Navegue até o diretório do jogo e execute-o.
+## 8. Run the Game
+Navigate to the game directory and run it.
 ```
 cd AI-Maze-Game/
 cd Maze-IA/
