@@ -162,6 +162,12 @@ cd Maze-IA/
 python3 game.py
 ```
 
+# Reconnecting to the Environment
+If you disconnect from the session, you can reconnect to the Conda environment by running:
+```
+source /home/yourusername/miniconda3/bin/activate
+```
+
 ---
 
 ## How to Play
