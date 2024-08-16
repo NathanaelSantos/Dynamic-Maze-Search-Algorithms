@@ -62,6 +62,18 @@ https://github.com/NathanaelSantos/Dynamic-Maze-Search-Algorithms/assets/4551915
 ---
 
 
+## Graphs generated based on the paths traversed by the chosen algorithm in the maze.
+
+## Breadth-First Search Graph
+![BuscaLargura](https://github.com/user-attachments/assets/486b7c76-e58d-4a7d-9724-30fb39d7e276)
+
+## Depth-First Search Graph
+![BuscaProfundidade](https://github.com/user-attachments/assets/29eec04c-95ab-4cb6-8260-f9bb7aec7088)
+
+## A* Search Graph
+![Caminho_A_Estrela](https://github.com/user-attachments/assets/2a545a01-8ea4-4a5b-8649-a088b02108b2)
+
+
 <img src="img/docker.png" alt="Imagem Docker" align="center" width="120">
 
 ## Running AI-Maze-Game with Docker and Xming on Windows
